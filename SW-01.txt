@@ -1,0 +1,38 @@
+enable
+conf t
+hostname SW-01
+enable secret  senai#10-10
+banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS!"
+username lucasjorge privilege 15 secret batata*0
+crypto key generate rsa general-key modulus 1024
+line vty 0 15
+transport input ssh 
+login local
+exit
+line console 0
+login local
+exit
+vlan 10
+name ESTUDANTES
+vlan 20
+name DIRETORIA
+vlan 50
+name SERVIDORES
+interface range fa0/1-2
+switchport mode access
+switchport access vlan 10
+interface range fa0/3-4
+switchport mode access
+switchport access vlan 20
+interface fa0/5
+switchport mode access
+switchport access vlan 50
+interface g0/1
+switchport mode trunk
+switchport trunk native vlan 99
+switchport trunk allowed vlan 10,20,50,99
+interface range fa0/6-24
+shutdown
+interface g0/2
+shutdown
+do wr
