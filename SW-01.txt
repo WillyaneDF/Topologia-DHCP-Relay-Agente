@@ -4,11 +4,6 @@ hostname SW-01
 enable secret  senai#10-10
 banner motd "ACESSO APENAS PARA PESSOAS AUTORIZADAS!"
 username lucasjorge privilege 15 secret batata*0
-crypto key generate rsa general-key modulus 1024
-line vty 0 15
-transport input ssh 
-login local
-exit
 line console 0
 login local
 exit
